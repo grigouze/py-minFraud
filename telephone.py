@@ -20,9 +20,3 @@ class Telephone(HTTPBase):
 
         for field in ALLOWED_FIELDS:
             self.allowed_fields[field] = 1
-
-if __name__ == '__main__':
-    aa = Telephone()
-    aa.input( { 'phone': 'New York' } )
-    aa.query()
-    print aa.output()

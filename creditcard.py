@@ -40,9 +40,3 @@ class CreditCard(HTTPBase):
         """
 
         return hashlib.md5(value.lower()).hexdigest()
-
-if __name__ == '__main__':
-    aa = CreditCard()
-    aa.input( { 'city': 'New York' } )
-    aa.query()
-    print aa.output()
