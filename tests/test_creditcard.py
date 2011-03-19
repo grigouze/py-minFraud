@@ -1,7 +1,11 @@
 #!/usr/bin/python
 
+"""
+Tests for CreditCard
+"""
+
 import hashlib
-from creditcard import CreditCard
+from minfraud.creditcard import CreditCard
 
 if __name__ == '__main__':
     aa = CreditCard()

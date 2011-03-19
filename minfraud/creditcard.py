@@ -6,7 +6,7 @@ Credit card verification of Maxmind
 
 import hashlib
 
-from httpbase import HTTPBase
+from minfraud.httpbase import HTTPBase
 
 ALLOWED_FIELDS = ( 'i', 'domain', 'city', 'region', 'postal', 'country', \
     'bin', 'binName', 'binPhone', 'custPhone', 'license_key', \

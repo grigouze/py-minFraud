@@ -4,7 +4,7 @@
 Telephone verification of Maxmind
 """
 
-from httpbase import HTTPBase
+from minfraud.httpbase import HTTPBase
 
 ALLOWED_FIELDS = ('l', 'phone', 'verify_code', 'language')
 
