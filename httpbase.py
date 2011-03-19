@@ -1,18 +1,18 @@
 #!/usr/bin/python
 
 """
+Base class for all Maxmind interaction
 """
 
 DEFAULTSERVERS = ( 'minfraud3.maxmind.com', 'minfraud1.maxmind.com' \
     'minfraud2.maxmind.com' )
-
-from datetime import time
 
 import urllib
 import urllib2
 
 class HTTPBase(object):
     """
+    Base class
     """
 
     url = ''
@@ -36,7 +36,18 @@ class HTTPBase(object):
         self.wsIpaddrCacheFile = '/tmp/maxmind.ws.cache'
         self._init()
 
+    def _init(self):
+        """
+        you have to subclass httpbase !
+        """
+
+        raise NotImplementedError
+
     def query(self):
+        """
+        send the query to maxmind server
+        """
+
         if self.useDNS != 1:
             print "bla"
 
@@ -46,19 +57,38 @@ class HTTPBase(object):
                 return result
         return 0
 
-    def input(self, vars={}):
-        for k, v in vars.items():
-            if not self.allowed_fields.get(k):
+    def input(self, inputs):
+        """
+        set the information to send for verification
+        """
+
+        if not inputs:
+            inputs = {}
+
+        for key, value in inputs.items():
+            if not self.allowed_fields.get(key):
                 raise 'truc'
-            self.queries[k] = self.filter_field(k, v)
+            self.queries[key] = self.filter_field(key, value)
 
     def filter_field(self, name, value):
+        """
+        base function for filtering
+        """
+
         return value
 
     def output(self):
+        """
+        Output of maxmind service
+        """
+
         return self._output
 
     def querySingleServer(self, server):
+        """
+        Send the information to maxmind in http
+        """
+
         if self.isSecure == 1:
             proto = 'https'
         else:
@@ -77,7 +107,7 @@ class HTTPBase(object):
         qs = urllib.urlencode(queries)
         #print "%s:%s" % ( url, qs )
 
-        f = urllib2.urlopen(url, qs, self.timeout)
+        f = urllib2.urlopen(url, qs, timeout)
 
         content = f.read()
 
